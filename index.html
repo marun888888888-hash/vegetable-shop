@@ -2,14 +2,18 @@
 <html lang="ta">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>அருண் காய்கறி கடை</title>
     <style>
-        body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        body { font-family: sans-serif; background: #f4f4f4; padding: 10px; margin: 0; }
+        h2 { text-align: center; font-size: 24px; }
+        /* மொபைலுக்கு ஏற்ற வகையில் கிரிட் மாற்றம் */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
         .card { background: white; padding: 15px; border-radius: 12px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .card h3 { margin: 10px 0; }
-        .btn { background: #25D366; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-        #orderLink { display: none; margin-top: 20px; padding: 15px; background: #075e54; color: white; text-align: center; border-radius: 10px; text-decoration: none; display: block; }
+        .card h3 { margin: 5px 0; font-size: 18px; }
+        .btn { background: #25D366; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        input { padding: 5px; width: 40px; }
+        #orderLink { display: none; margin-top: 20px; padding: 15px; background: #075e54; color: white; text-align: center; border-radius: 10px; text-decoration: none; display: block; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -19,23 +23,23 @@
     <div class="grid">
         <div class="card">
             <h3>தக்காளி</h3><p>₹40 /kg</p>
-            <input type="number" id="qty-Thakkali" value="1" min="1" style="width: 40px;"> kg
-            <button class="btn" onclick="add('Thakkali', document.getElementById('qty-Thakkali').value)">சேர்க்கவும்</button>
+            <input type="number" id="qty-Thakkali" value="1" min="1"> kg
+            <button class="btn" onclick="add('தக்காளி', document.getElementById('qty-Thakkali').value)">சேர்க்கவும்</button>
         </div>
         <div class="card">
             <h3>உருளைக்கிழங்கு</h3><p>₹30 /kg</p>
-            <input type="number" id="qty-Urulaikilangu" value="1" min="1" style="width: 40px;"> kg
-            <button class="btn" onclick="add('Urulaikilangu', document.getElementById('qty-Urulaikilangu').value)">சேர்க்கவும்</button>
+            <input type="number" id="qty-Urulaikilangu" value="1" min="1"> kg
+            <button class="btn" onclick="add('உருளைக்கிழங்கு', document.getElementById('qty-Urulaikilangu').value)">சேர்க்கவும்</button>
         </div>
         <div class="card">
             <h3>உள்ளி</h3><p>₹80 /kg</p>
-            <input type="number" id="qty-Ulli" value="1" min="1" style="width: 40px;"> kg
-            <button class="btn" onclick="add('Ulli', document.getElementById('qty-Ulli').value)">சேர்க்கவும்</button>
+            <input type="number" id="qty-Ulli" value="1" min="1"> kg
+            <button class="btn" onclick="add('உள்ளி', document.getElementById('qty-Ulli').value)">சேர்க்கவும்</button>
         </div>
         <div class="card">
             <h3>பல்லாரி</h3><p>₹50 /kg</p>
-            <input type="number" id="qty-Pallari" value="1" min="1" style="width: 40px;"> kg
-            <button class="btn" onclick="add('Pallari', document.getElementById('qty-Pallari').value)">சேர்க்கவும்</button>
+            <input type="number" id="qty-Pallari" value="1" min="1"> kg
+            <button class="btn" onclick="add('பல்லாரி', document.getElementById('qty-Pallari').value)">சேர்க்கவும்</button>
         </div>
     </div>
 
