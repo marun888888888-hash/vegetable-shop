@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <title>அருண் காய்கறி கடை</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f4; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .card { background: white; padding: 15px; border-radius: 12px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .card h3 { margin: 10px 0; }
+        .btn { background: #25D366; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        .whatsapp-btn { background: #075e54; color: white; padding: 15px; width: 100%; text-align: center; border-radius: 10px; margin-top: 20px; text-decoration: none; display: block; }
+    </style>
+</head>
+<body>
+
+    <h2 style="text-align:center;">🥦 அருண் காய்கறி கடை</h2>
+
+    <div class="grid">
+        <div class="card"><h3>தக்காளி</h3><p>₹40 /kg</p><button class="btn" onclick="add('தக்காளி')">சேர்க்கவும்</button></div>
+        <div class="card"><h3>உருளைக்கிழங்கு</h3><p>₹30 /kg</p><button class="btn" onclick="add('உருளைக்கிழங்கு')">சேர்க்கவும்</button></div>
+        <div class="card"><h3>உள்ளி</h3><p>₹80 /kg</p><button class="btn" onclick="add('உள்ளி')">சேர்க்கவும்</button></div>
+        <div class="card"><h3>பல்லாரி</h3><p>₹50 /kg</p><button class="btn" onclick="add('பல்லாரி')">சேர்க்கவும்</button></div>
+    </div>
+
+    <a id="orderLink" href="#" class="whatsapp-btn" style="display:none;">WhatsApp-ல் ஆர்டர் செய்யவும்</a>
+
+    <script>
+        let cart = [];
+        function add(item) {
+            cart.push(item);
+            alert(item + " சேர்க்கப்பட்டது!");
+            document.getElementById('orderLink').style.display = 'block';
+            document.getElementById('orderLink').href = "https://wa.me/919894963170?text=எனக்கு இந்த காய்கறிகள் வேண்டும்: " + cart.join(", ");
+        }
+    </script>
+</body>
+</html>
