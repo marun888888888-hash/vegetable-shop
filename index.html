@@ -5,16 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>அருண் காய்கறி கடை</title>
     <style>
-        body { font-family: sans-serif; background: #f4f4f4; padding: 10px; margin: 0; }
-        h2 { text-align: center; font-size: 24px; color: #333; }
+        /* வண்ணங்களை மாற்றியுள்ளேன் - லேசான நீல நிற பின்னணி */
+        body { font-family: sans-serif; background: #eefbff; padding: 10px; margin: 0; }
+        h2 { text-align: center; font-size: 28px; color: #0056b3; margin-bottom: 20px; }
+        
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
         .card { background: white; padding: 15px; border-radius: 15px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; margin-bottom: 10px; }
         .card h3 { margin: 10px 0; font-size: 20px; }
         .card p { font-size: 16px; color: #555; }
-        .btn { background: #25D366; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; }
+        
+        /* பட்டன் நிறம் மாற்றம் - இப்போது நீல நிறம் */
+        .btn { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; }
         input { padding: 8px; width: 50px; border: 1px solid #ccc; border-radius: 5px; text-align: center; }
-        #orderLink { display: none; margin-top: 25px; padding: 15px; background: #075e54; color: white; text-align: center; border-radius: 10px; text-decoration: none; font-weight: bold; }
+        
+        #orderLink { display: none; margin-top: 25px; padding: 15px; background: #25D366; color: white; text-align: center; border-radius: 10px; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -22,28 +27,24 @@
     <h2>🛒 அருண் காய்கறி கடை</h2>
 
     <div class="grid">
-        <!-- தக்காளி -->
         <div class="card">
             <img src="thakkali.jpg" alt="தக்காளி">
             <h3>தக்காளி</h3><p>₹40 /kg</p>
             <input type="number" id="qty-Thakkali" value="1" min="1"> kg
             <button class="btn" onclick="add('தக்காளி', document.getElementById('qty-Thakkali').value)">சேர்க்கவும்</button>
         </div>
-        <!-- உருளைக்கிழங்கு -->
         <div class="card">
             <img src="potato.jpg" alt="உருளைக்கிழங்கு">
             <h3>உருளைக்கிழங்கு</h3><p>₹30 /kg</p>
             <input type="number" id="qty-Urulaikilangu" value="1" min="1"> kg
             <button class="btn" onclick="add('உருளைக்கிழங்கு', document.getElementById('qty-Urulaikilangu').value)">சேர்க்கவும்</button>
         </div>
-        <!-- உள்ளி -->
         <div class="card">
             <img src="small onion.jpg" alt="உள்ளி">
             <h3>உள்ளி</h3><p>₹80 /kg</p>
             <input type="number" id="qty-Ulli" value="1" min="1"> kg
             <button class="btn" onclick="add('உள்ளி', document.getElementById('qty-Ulli').value)">சேர்க்கவும்</button>
         </div>
-        <!-- பல்லாரி -->
         <div class="card">
             <img src="onion.jpg" alt="பல்லாரி">
             <h3>பல்லாரி</h3><p>₹50 /kg</p>
@@ -59,8 +60,15 @@
         function add(item, qty) {
             cart.push(item + " (" + qty + " kg)");
             alert(item + " " + qty + " kg சேர்க்கப்பட்டது!");
+            
             document.getElementById('orderLink').style.display = 'block';
-            document.getElementById('orderLink').href = "https://wa.me/919894963170?text=எனக்கு இந்த காய்கறிகள் வேண்டும்: " + cart.join(", ");
+            
+            // மேம்படுத்தப்பட்ட வாட்ஸ்அப் மெசேஜ் விவரங்கள்
+            let message = "வணக்கம், அருண் காய்கறி கடையிலிருந்து ஆர்டர் செய்ய விரும்புகிறேன்:%0A%0A" + 
+                          "தேவையானவை: " + cart.join(", ") + "%0A%0A" +
+                          "தயவுசெய்து விரைவில் டெலிவரி செய்யவும்!";
+            
+            document.getElementById('orderLink').href = "https://wa.me/919894963170?text=" + message;
         }
     </script>
 </body>
