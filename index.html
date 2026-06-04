@@ -7,85 +7,78 @@
     <style>
         body { font-family: sans-serif; background: #eefbff; padding: 10px; }
         h2 { text-align: center; color: #0056b3; }
-        
-        /* தேடல் வசதி */
         #search { width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
-        
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
         .card { background: white; padding: 15px; border-radius: 15px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; }
-        
-        /* + மற்றும் - பட்டன்கள் */
         .qty-control { display: flex; justify-content: center; align-items: center; margin: 10px 0; }
         .qty-btn { padding: 5px 15px; cursor: pointer; background: #ddd; border: none; border-radius: 5px; }
         .qty-val { margin: 0 10px; font-weight: bold; }
-        
-        .btn { background: #007bff; color: white; border: none; padding: 10px; width: 100%; border-radius: 8px; cursor: pointer; }
-        #orderLink { display: none; margin-top: 20px; padding: 15px; background: #25D366; color: white; text-align: center; border-radius: 10px; text-decoration: none; font-weight: bold; }
         #totalPrice { font-weight: bold; font-size: 18px; margin-top: 10px; }
+        .input-field { width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        #orderBtn { display: none; width: 100%; padding: 15px; margin-top: 20px; background: #25D366; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <h2>🛒 அருண் காய்கறி கடை</h2>
-    
-    <!-- தேடல் வசதி -->
     <input type="text" id="search" placeholder="காய்கறிகளைத் தேடவும்..." onkeyup="filterItems()">
 
     <div class="grid" id="productGrid">
-        <!-- தக்காளி -->
+        <!-- பொருட்கள் -->
         <div class="card product" data-name="தக்காளி">
             <img src="thakkali.jpg" alt="தக்காளி">
             <h3>தக்காளி</h3><p>₹40 /kg</p>
             <div class="qty-control">
-                <button class="qty-btn" onclick="changeQty('Thakkali', -1, 40)">-</button>
+                <button class="qty-btn" type="button" onclick="changeQty('Thakkali', -1)">-</button>
                 <span id="qty-Thakkali" class="qty-val">0</span>
-                <button class="qty-btn" onclick="changeQty('Thakkali', 1, 40)">+</button>
+                <button class="qty-btn" type="button" onclick="changeQty('Thakkali', 1)">+</button>
             </div>
         </div>
-        <!-- உருளைக்கிழங்கு -->
         <div class="card product" data-name="உருளைக்கிழங்கு">
             <img src="potato.jpg" alt="உருளைக்கிழங்கு">
             <h3>உருளைக்கிழங்கு</h3><p>₹30 /kg</p>
             <div class="qty-control">
-                <button class="qty-btn" onclick="changeQty('Urulaikilangu', -1, 30)">-</button>
+                <button class="qty-btn" type="button" onclick="changeQty('Urulaikilangu', -1)">-</button>
                 <span id="qty-Urulaikilangu" class="qty-val">0</span>
-                <button class="qty-btn" onclick="changeQty('Urulaikilangu', 1, 30)">+</button>
+                <button class="qty-btn" type="button" onclick="changeQty('Urulaikilangu', 1)">+</button>
             </div>
         </div>
-        <!-- உள்ளி -->
         <div class="card product" data-name="உள்ளி">
             <img src="small onion.jpg" alt="உள்ளி">
             <h3>உள்ளி</h3><p>₹80 /kg</p>
             <div class="qty-control">
-                <button class="qty-btn" onclick="changeQty('Ulli', -1, 80)">-</button>
+                <button class="qty-btn" type="button" onclick="changeQty('Ulli', -1)">-</button>
                 <span id="qty-Ulli" class="qty-val">0</span>
-                <button class="qty-btn" onclick="changeQty('Ulli', 1, 80)">+</button>
+                <button class="qty-btn" type="button" onclick="changeQty('Ulli', 1)">+</button>
             </div>
         </div>
-        <!-- பல்லாரி -->
         <div class="card product" data-name="பல்லாரி">
             <img src="onion.jpg" alt="பல்லாரி">
             <h3>பல்லாரி</h3><p>₹50 /kg</p>
             <div class="qty-control">
-                <button class="qty-btn" onclick="changeQty('Pallari', -1, 50)">-</button>
+                <button class="qty-btn" type="button" onclick="changeQty('Pallari', -1)">-</button>
                 <span id="qty-Pallari" class="qty-val">0</span>
-                <button class="qty-btn" onclick="changeQty('Pallari', 1, 50)">+</button>
+                <button class="qty-btn" type="button" onclick="changeQty('Pallari', 1)">+</button>
             </div>
         </div>
     </div>
 
     <div id="totalPrice">மொத்த விலை: ₹0</div>
-    <input type="text" id="address" placeholder="முகவரி" style="width:100%; padding:10px; margin-top:10px;">
-    <input type="text" id="phone" placeholder="போன் நம்பர்" style="width:100%; padding:10px; margin-top:10px;">
-    <a id="orderLink" href="#" onclick="prepareOrder()">WhatsApp-ல் ஆர்டர் அனுப்பவும்</a>
+
+    <!-- Form - முகவரி மற்றும் போன் நம்பர் கட்டாயம் (required) -->
+    <form id="orderForm" onsubmit="sendOrder(event)">
+        <input type="text" id="address" class="input-field" placeholder="முகவரி (கட்டாயம்)" required>
+        <input type="tel" id="phone" class="input-field" placeholder="போன் நம்பர் (கட்டாயம்)" required>
+        <button type="submit" id="orderBtn">WhatsApp-ல் ஆர்டர் அனுப்பவும்</button>
+    </form>
 
     <script>
         let quantities = { 'Thakkali': 0, 'Urulaikilangu': 0, 'Ulli': 0, 'Pallari': 0 };
         let prices = { 'Thakkali': 40, 'Urulaikilangu': 30, 'Ulli': 80, 'Pallari': 50 };
         let names = { 'Thakkali': 'தக்காளி', 'Urulaikilangu': 'உருளைக்கிழங்கு', 'Ulli': 'உள்ளி', 'Pallari': 'பல்லாரி' };
 
-        function changeQty(item, val, price) {
+        function changeQty(item, val) {
             quantities[item] = Math.max(0, quantities[item] + val);
             document.getElementById('qty-' + item).innerText = quantities[item];
             calculateTotal();
@@ -95,7 +88,7 @@
             let total = 0;
             for(let item in quantities) total += quantities[item] * prices[item];
             document.getElementById('totalPrice').innerText = "மொத்த விலை: ₹" + total;
-            document.getElementById('orderLink').style.display = total > 0 ? 'block' : 'none';
+            document.getElementById('orderBtn').style.display = total > 0 ? 'block' : 'none';
         }
 
         function filterItems() {
@@ -105,11 +98,16 @@
             });
         }
 
-        function prepareOrder() {
+        function sendOrder(event) {
+            event.preventDefault();
             let orderList = [];
             for(let item in quantities) if(quantities[item] > 0) orderList.push(names[item] + " (" + quantities[item] + "kg)");
-            let msg = "ஆர்டர்:%0A" + orderList.join("%0A") + "%0A%0Aமுகவரி: " + document.getElementById('address').value + "%0Aபோன்: " + document.getElementById('phone').value;
-            document.getElementById('orderLink').href = "https://wa.me/919894963170?text=" + msg;
+            
+            let address = document.getElementById('address').value;
+            let phone = document.getElementById('phone').value;
+            
+            let msg = "ஆர்டர்:%0A" + orderList.join("%0A") + "%0A%0Aமுகவரி: " + address + "%0Aபோன்: " + phone + "%0A%0Aதயவுசெய்து விரைவில் டெலிவரி செய்யவும்!";
+            window.location.href = "https://wa.me/919894963170?text=" + msg;
         }
     </script>
 </body>
