@@ -5,77 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>அருண் காய்கறி கடை</title>
     <style>
-        body { font-family: sans-serif; background: #eefbff; padding: 10px; margin: 0; }
-        h2 { text-align: center; font-size: 28px; color: #0056b3; margin-bottom: 20px; }
+        body { font-family: sans-serif; background: #eefbff; padding: 10px; }
+        h2 { text-align: center; color: #0056b3; }
+        
+        /* தேடல் வசதி */
+        #search { width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
         .card { background: white; padding: 15px; border-radius: 15px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; margin-bottom: 10px; }
-        .card h3 { margin: 10px 0; font-size: 20px; }
-        .card p { font-size: 16px; color: #555; }
-        .btn { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; }
+        .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; }
         
-        /* புதிய உள்ளீட்டு பெட்டிகள் */
-        .info-input { width: 100%; padding: 12px; margin-top: 10px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        /* + மற்றும் - பட்டன்கள் */
+        .qty-control { display: flex; justify-content: center; align-items: center; margin: 10px 0; }
+        .qty-btn { padding: 5px 15px; cursor: pointer; background: #ddd; border: none; border-radius: 5px; }
+        .qty-val { margin: 0 10px; font-weight: bold; }
         
+        .btn { background: #007bff; color: white; border: none; padding: 10px; width: 100%; border-radius: 8px; cursor: pointer; }
         #orderLink { display: none; margin-top: 20px; padding: 15px; background: #25D366; color: white; text-align: center; border-radius: 10px; text-decoration: none; font-weight: bold; }
+        #totalPrice { font-weight: bold; font-size: 18px; margin-top: 10px; }
     </style>
 </head>
 <body>
 
     <h2>🛒 அருண் காய்கறி கடை</h2>
+    
+    <!-- தேடல் வசதி -->
+    <input type="text" id="search" placeholder="காய்கறிகளைத் தேடவும்..." onkeyup="filterItems()">
 
-    <div class="grid">
-        <div class="card">
+    <div class="grid" id="productGrid">
+        <!-- தக்காளி -->
+        <div class="card product" data-name="தக்காளி">
             <img src="thakkali.jpg" alt="தக்காளி">
             <h3>தக்காளி</h3><p>₹40 /kg</p>
-            <input type="number" id="qty-Thakkali" value="1" min="1"> kg
-            <button class="btn" onclick="add('தக்காளி', document.getElementById('qty-Thakkali').value)">சேர்க்கவும்</button>
+            <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty('Thakkali', -1, 40)">-</button>
+                <span id="qty-Thakkali" class="qty-val">0</span>
+                <button class="qty-btn" onclick="changeQty('Thakkali', 1, 40)">+</button>
+            </div>
         </div>
-        <div class="card">
+        <!-- உருளைக்கிழங்கு -->
+        <div class="card product" data-name="உருளைக்கிழங்கு">
             <img src="potato.jpg" alt="உருளைக்கிழங்கு">
             <h3>உருளைக்கிழங்கு</h3><p>₹30 /kg</p>
-            <input type="number" id="qty-Urulaikilangu" value="1" min="1"> kg
-            <button class="btn" onclick="add('உருளைக்கிழங்கு', document.getElementById('qty-Urulaikilangu').value)">சேர்க்கவும்</button>
+            <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty('Urulaikilangu', -1, 30)">-</button>
+                <span id="qty-Urulaikilangu" class="qty-val">0</span>
+                <button class="qty-btn" onclick="changeQty('Urulaikilangu', 1, 30)">+</button>
+            </div>
         </div>
-        <div class="card">
+        <!-- உள்ளி -->
+        <div class="card product" data-name="உள்ளி">
             <img src="small onion.jpg" alt="உள்ளி">
             <h3>உள்ளி</h3><p>₹80 /kg</p>
-            <input type="number" id="qty-Ulli" value="1" min="1"> kg
-            <button class="btn" onclick="add('உள்ளி', document.getElementById('qty-Ulli').value)">சேர்க்கவும்</button>
+            <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty('Ulli', -1, 80)">-</button>
+                <span id="qty-Ulli" class="qty-val">0</span>
+                <button class="qty-btn" onclick="changeQty('Ulli', 1, 80)">+</button>
+            </div>
         </div>
-        <div class="card">
+        <!-- பல்லாரி -->
+        <div class="card product" data-name="பல்லாரி">
             <img src="onion.jpg" alt="பல்லாரி">
             <h3>பல்லாரி</h3><p>₹50 /kg</p>
-            <input type="number" id="qty-Pallari" value="1" min="1"> kg
-            <button class="btn" onclick="add('பல்லாரி', document.getElementById('qty-Pallari').value)">சேர்க்கவும்</button>
+            <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty('Pallari', -1, 50)">-</button>
+                <span id="qty-Pallari" class="qty-val">0</span>
+                <button class="qty-btn" onclick="changeQty('Pallari', 1, 50)">+</button>
+            </div>
         </div>
     </div>
 
-    <input type="text" id="address" class="info-input" placeholder="உங்கள் முகவரியை உள்ளிடவும்">
-    <input type="tel" id="phone" class="info-input" placeholder="உங்கள் போன் நம்பரை உள்ளிடவும்">
-
-    <a id="orderLink" href="#" onclick="updateLink()">WhatsApp-ல் ஆர்டர் அனுப்பவும்</a>
+    <div id="totalPrice">மொத்த விலை: ₹0</div>
+    <input type="text" id="address" placeholder="முகவரி" style="width:100%; padding:10px; margin-top:10px;">
+    <input type="text" id="phone" placeholder="போன் நம்பர்" style="width:100%; padding:10px; margin-top:10px;">
+    <a id="orderLink" href="#" onclick="prepareOrder()">WhatsApp-ல் ஆர்டர் அனுப்பவும்</a>
 
     <script>
-        let cart = [];
-        function add(item, qty) {
-            cart.push(item + " (" + qty + " kg)");
-            alert(item + " " + qty + " kg சேர்க்கப்பட்டது!");
-            document.getElementById('orderLink').style.display = 'block';
-            updateLink();
+        let quantities = { 'Thakkali': 0, 'Urulaikilangu': 0, 'Ulli': 0, 'Pallari': 0 };
+        let prices = { 'Thakkali': 40, 'Urulaikilangu': 30, 'Ulli': 80, 'Pallari': 50 };
+        let names = { 'Thakkali': 'தக்காளி', 'Urulaikilangu': 'உருளைக்கிழங்கு', 'Ulli': 'உள்ளி', 'Pallari': 'பல்லாரி' };
+
+        function changeQty(item, val, price) {
+            quantities[item] = Math.max(0, quantities[item] + val);
+            document.getElementById('qty-' + item).innerText = quantities[item];
+            calculateTotal();
         }
 
-        function updateLink() {
-            let userAddress = document.getElementById('address').value;
-            let userPhone = document.getElementById('phone').value;
-            
-            let message = "வணக்கம், அருண் காய்கறி கடையிலிருந்து ஆர்டர் செய்ய விரும்புகிறேன்:%0A%0A" + 
-                          "தேவையானவை: " + cart.join(", ") + "%0A" +
-                          "முகவரி: " + (userAddress ? userAddress : "குறிப்பிடவில்லை") + "%0A" +
-                          "போன் நம்பர்: " + (userPhone ? userPhone : "குறிப்பிடவில்லை") + "%0A%0A" +
-                          "தயவுசெய்து விரைவில் டெலிவரி செய்யவும்!";
-            
-            document.getElementById('orderLink').href = "https://wa.me/919894963170?text=" + message;
+        function calculateTotal() {
+            let total = 0;
+            for(let item in quantities) total += quantities[item] * prices[item];
+            document.getElementById('totalPrice').innerText = "மொத்த விலை: ₹" + total;
+            document.getElementById('orderLink').style.display = total > 0 ? 'block' : 'none';
+        }
+
+        function filterItems() {
+            let query = document.getElementById('search').value.toLowerCase();
+            document.querySelectorAll('.product').forEach(card => {
+                card.style.display = card.getAttribute('data-name').toLowerCase().includes(query) ? 'block' : 'none';
+            });
+        }
+
+        function prepareOrder() {
+            let orderList = [];
+            for(let item in quantities) if(quantities[item] > 0) orderList.push(names[item] + " (" + quantities[item] + "kg)");
+            let msg = "ஆர்டர்:%0A" + orderList.join("%0A") + "%0A%0Aமுகவரி: " + document.getElementById('address').value + "%0Aபோன்: " + document.getElementById('phone').value;
+            document.getElementById('orderLink').href = "https://wa.me/919894963170?text=" + msg;
         }
     </script>
 </body>
