@@ -17,6 +17,15 @@
         #totalPrice { font-weight: bold; font-size: 18px; margin-top: 10px; }
         .input-field { width: 100%; padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
         #orderBtn { display: none; width: 100%; padding: 15px; margin-top: 20px; background: #25D366; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; }
+
+        /* மொபைல் ரெஸ்பான்சிவ் டிசைன் */
+        @media (max-width: 600px) {
+            body { padding: 5px; }
+            h2 { font-size: 22px; }
+            .btn, .qty-btn, .input-field, #orderBtn { padding: 15px; font-size: 16px; }
+            .grid { gap: 10px; }
+            .card { padding: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -25,7 +34,6 @@
     <input type="text" id="search" placeholder="காய்கறிகளைத் தேடவும்..." onkeyup="filterItems()">
 
     <div class="grid" id="productGrid">
-        <!-- பொருட்கள் -->
         <div class="card product" data-name="தக்காளி">
             <img src="thakkali.jpg" alt="தக்காளி">
             <h3>தக்காளி</h3><p>₹40 /kg</p>
@@ -66,7 +74,6 @@
 
     <div id="totalPrice">மொத்த விலை: ₹0</div>
 
-    <!-- Form - முகவரி மற்றும் போன் நம்பர் கட்டாயம் (required) -->
     <form id="orderForm" onsubmit="sendOrder(event)">
         <input type="text" id="address" class="input-field" placeholder="முகவரி (கட்டாயம்)" required>
         <input type="tel" id="phone" class="input-field" placeholder="போன் நம்பர் (கட்டாயம்)" required>
