@@ -13,10 +13,9 @@
         .card h3 { margin: 10px 0; font-size: 20px; }
         .card p { font-size: 16px; color: #555; }
         .btn { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; }
-        input[type="number"] { padding: 8px; width: 50px; border: 1px solid #ccc; border-radius: 5px; text-align: center; }
         
-        /* முகவரி பெட்டிக்கான ஸ்டைல் */
-        #address { width: 100%; padding: 12px; margin-top: 20px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+        /* புதிய உள்ளீட்டு பெட்டிகள் */
+        .info-input { width: 100%; padding: 12px; margin-top: 10px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
         
         #orderLink { display: none; margin-top: 20px; padding: 15px; background: #25D366; color: white; text-align: center; border-radius: 10px; text-decoration: none; font-weight: bold; }
     </style>
@@ -52,7 +51,8 @@
         </div>
     </div>
 
-    <input type="text" id="address" placeholder="உங்கள் முகவரியை இங்கே உள்ளிடவும்">
+    <input type="text" id="address" class="info-input" placeholder="உங்கள் முகவரியை உள்ளிடவும்">
+    <input type="tel" id="phone" class="info-input" placeholder="உங்கள் போன் நம்பரை உள்ளிடவும்">
 
     <a id="orderLink" href="#" onclick="updateLink()">WhatsApp-ல் ஆர்டர் அனுப்பவும்</a>
 
@@ -67,9 +67,12 @@
 
         function updateLink() {
             let userAddress = document.getElementById('address').value;
+            let userPhone = document.getElementById('phone').value;
+            
             let message = "வணக்கம், அருண் காய்கறி கடையிலிருந்து ஆர்டர் செய்ய விரும்புகிறேன்:%0A%0A" + 
                           "தேவையானவை: " + cart.join(", ") + "%0A" +
-                          "முகவரி: " + (userAddress ? userAddress : "குறிப்பிடவில்லை") + "%0A%0A" +
+                          "முகவரி: " + (userAddress ? userAddress : "குறிப்பிடவில்லை") + "%0A" +
+                          "போன் நம்பர்: " + (userPhone ? userPhone : "குறிப்பிடவில்லை") + "%0A%0A" +
                           "தயவுசெய்து விரைவில் டெலிவரி செய்யவும்!";
             
             document.getElementById('orderLink').href = "https://wa.me/919894963170?text=" + message;
