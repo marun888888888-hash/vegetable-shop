@@ -6,19 +6,20 @@
     <title>அருண் காய்கறி கடை</title>
     <style>
         body { font-family: sans-serif; background: #f4f4f4; padding: 10px; margin: 0; }
-        h2 { text-align: center; font-size: 24px; }
-        /* மொபைலுக்கு ஏற்ற வகையில் கிரிட் மாற்றம் */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
-        .card { background: white; padding: 15px; border-radius: 12px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .card h3 { margin: 5px 0; font-size: 18px; }
-        .btn { background: #25D366; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-        input { padding: 5px; width: 40px; }
-        #orderLink { display: none; margin-top: 20px; padding: 15px; background: #075e54; color: white; text-align: center; border-radius: 10px; text-decoration: none; display: block; font-weight: bold; }
+        h2 { text-align: center; font-size: 24px; color: #333; }
+        /* இதுதான் கார்டுகளைச் சீராக அடுக்க உதவும் */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .card { background: white; padding: 15px; border-radius: 15px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .card h3 { margin: 10px 0; font-size: 20px; }
+        .card p { font-size: 16px; color: #555; }
+        .btn { background: #25D366; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; }
+        input { padding: 8px; width: 50px; border: 1px solid #ccc; border-radius: 5px; text-align: center; }
+        #orderLink { display: none; margin-top: 25px; padding: 15px; background: #075e54; color: white; text-align: center; border-radius: 10px; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <h2 style="text-align:center;">🛒 அருண் காய்கறி கடை</h2>
+    <h2>🛒 அருண் காய்கறி கடை</h2>
 
     <div class="grid">
         <div class="card">
